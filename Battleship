@@ -1,0 +1,45 @@
+import java.util.*;
+public class battleship
+{
+    //Instance Variables
+    String[] board; 
+    public battleship()
+    {
+        board = new String[50];
+        for(int i =0 ; i <=49; i++) {
+            board [i] = "~ ";
+        }
+
+    }
+    public void setPosition()
+    {
+        //Creates Ship 1
+        int position1 = (int) ((Math.random() * 47) + 1);
+        for (int i = position1; i <= (position1 + 2); i++) 
+        {
+            board[i] = "Pets.com ";
+        }  
+        //Creates Ship 2
+        int position2;
+        do { //Avoid Overlap Between Ships
+           position2 = (int) ((Math.random() * 47) + 1);
+        } while ((position2 > (position1 + 2)) && (position2 < (position1 - 2)));  
+        for (int i = position2; i <= (position2 + 2); i++) 
+        {
+            board[i] = "AskJeeves.com ";
+        }  
+        //Creates Ship 3
+        int position3;
+        do { //Avoid Overlap Between Ships
+           position3 = (int) ((Math.random() * 47) + 1);
+        } while (((position3 > (position1 + 2)) && (position3 < (position1 - 2))) && ((position2 > (position1 + 2)) && (position2 < (position1 - 2))));  
+        for (int i = position3; i <= (position3 + 2); i++) 
+        {
+            board[i] = "Excitement.com ";
+        }  
+    }
+    public String getShip(int i)
+    {
+        return board[i];
+    }
+}
