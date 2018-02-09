@@ -1,11 +1,22 @@
+import java.util.Scanner;
 public class battleshipDriver
 {
    public static void main (String args[]) 
    {
-       battleship b1 = new battleship();
-       b1.setPosition();
-       for (int i = 0; i <= 49; i++) {
-           System.out.print(b1.getShip(i));
+       Scanner sc = new Scanner(System.in);
+       System.out.println("Welcome to the Dot-Com Battleship Game!");
+       System.out.println("Begin Game? (Y/N)");
+       String g = sc.nextLine();
+       if (g.equals("Y")) {
+           battleship b1 = new battleship();
+           b1.setPosition();
+           for (int i = 0; i <= 49; i++) {
+               System.out.print(b1.getShip(i));
+           }
+       } else if (g.equals("N")) {
+           System.out.print("Ok. You can rerun the program if you change your mind.");
+       } else {
+           System.out.print("Please input Y or N. Please rerun the program.");
        }
    }
 }
