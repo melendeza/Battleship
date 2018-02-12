@@ -1,17 +1,17 @@
 import java.util.*;
 public class battleship
 {
-    //Instance Variables
+    //Instance Variable
     String[] board; 
-    public battleship()
+    public battleship()    //Creates blank board
     {
         board = new String[50];
         for(int i =0 ; i <=49; i++) {
-            board [i] = "~ ";
+            board [i] = "~ "; // "~" is water
         }
 
     }
-    public void setPosition()
+    public void setPosition() //Creates 3 ships (they won't collide!)
     {
         //Creates Ship 1
         int position1 = (int) ((Math.random() * 47) + 1);
@@ -21,7 +21,7 @@ public class battleship
         }  
         //Creates Ship 2
         int position2;
-        do { //Avoid Overlap Between Ships
+        do { //Avoids Overlap Between Existing Ships
            position2 = (int) ((Math.random() * 47) + 1);
         } while ((position2 > (position1 + 2)) && (position2 < (position1 - 2)));  
         for (int i = position2; i <= (position2 + 2); i++) 
@@ -30,18 +30,41 @@ public class battleship
         }  
         //Creates Ship 3
         int position3;
-        do { //Avoid Overlap Between Ships
+        do { //Avoids Overlap Between Existing Ships
            position3 = (int) ((Math.random() * 47) + 1);
-        } while (((position3 > (position1 + 2)) && (position3 < (position1 - 2))) && ((position2 > (position1 + 2)) && (position2 < (position1 - 2))));  
+        } while (((position3 > (position1 + 2)) && (position3 < (position1 - 2))) && ((position3 > (position2 + 2)) && (position3 < (position2 - 2))));  
         for (int i = position3; i <= (position3 + 2); i++) 
         {
-            board[i] = "Excitement.com ";
+            board[i] = "Beenz.com ";
         }  
     }
-    public String getShip(int i)
+    public String getShip(int i) //Access value of a slot in the array
     {
         return board[i];
     }
-
+    public boolean isGameOver() //Checks if there are any non water tiles left
+    {
+        if((!(Arrays.asList(board).contains("Pets.com ")))&&(!(Arrays.asList(board).contains("AskJeeves.com ")))&&(!(Arrays.asList(board).contains("Beenz.com ")))){
+            return true;
+        } else {
+            return false;
+        }   
+    }
+    public int shipsRemaining() //Checks how many ships remain
+    {
+        int tempCounter = 0;
+        if ((Arrays.asList(board).contains("Pets.com "))) {
+            tempCounter += 1;
+        }
+        if ((Arrays.asList(board).contains("AskJeeves.com "))) {
+            tempCounter += 1;
+        }
+        if ((Arrays.asList(board).contains("Beenz.com "))) {
+            tempCounter += 1;
+        }
+        return tempCounter;
+    }
+    public void hit(int x){ //Mutator: If Hit, Value is changed to "~"
+        board [x] = "~ "; 
+    }
 }
-
