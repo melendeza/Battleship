@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 public class battleshipDriver
 {
    public static void main (String args[]) 
@@ -7,15 +7,41 @@ public class battleshipDriver
        System.out.println("Welcome to the Dot-Com Battleship Game!");
        System.out.println("Begin Game? (Y/N)");
        String g = sc.nextLine();
-       if (g.equals("Y")) {
-           battleship b1 = new battleship();
-           b1.setPosition();
-           for (int i = 0; i <= 49; i++) {
-               System.out.print(b1.getShip(i));
+       if (g.equals("Y")) { //User begins game with Y input
+           battleship b1 = new battleship(); //Creates instance
+           b1.setPosition(); //Sets random ship positions
+           //Intro
+           System.out.println(); 
+           System.out.println("In this game there are 50 ocean tiles");
+           System.out.println("with 3 dot-com ships that are placed randomly.");
+           System.out.println("Each ship takes up 3 spaces, hit them all to sink the ship.");
+           System.out.println("Sink all dot-com ships in as few turns as possible!");
+           System.out.println();
+           
+           int i; //Turn Counter
+           
+           //Turn Structure
+           for (i = 1; !(b1.isGameOver()); i++) { 
+               System.out.println("Turn #" + i);
+               System.out.println("Guess tile (1-50)");
+               int c = (sc.nextInt() - 1);
+               if (Arrays.asList("Pets.com ","AskJeeves.com ","Beenz.com ").contains(b1.getShip(c))) { //HIT
+                   b1.hit(c);
+                   System.out.println("Hit!"); 
+                   System.out.println("There are " + b1.shipsRemaining() + " ships remaining.");
+                   System.out.println();
+                   
+               } else { //MISS
+                   System.out.println("Miss.");
+                   System.out.println();
+               }
            }
-       } else if (g.equals("N")) {
+           //GAME END
+           System.out.println("Congratulatons. You have sunk all of the dot coms!");
+           System.out.println("And it only took you " + (i - 1) + " tries!");
+       } else if (g.equals("N")) { //User rejects game start
            System.out.print("Ok. You can rerun the program if you change your mind.");
-       } else {
+       } else { //Wrong input
            System.out.print("Please input Y or N. Please rerun the program.");
        }
    }
