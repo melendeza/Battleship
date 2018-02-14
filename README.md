@@ -1,3 +1,3 @@
 # Battleship
 
-# Dot-com Battleship game using 1-D Arrays.
+#Dot-com Battleship game using 1-D Arrays.
